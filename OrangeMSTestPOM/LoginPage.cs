@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace OrangeMSTestPOM
 {
+    //class creating
     public class LoginPage
     {
         private readonly IWebDriver driver;
