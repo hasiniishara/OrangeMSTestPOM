@@ -15,5 +15,13 @@ namespace OrangeMSTestPOM
         {
             this.driver = driver;
         }
+
+        public IWebElement AdminNaviBtn => driver.FindElement(By.XPath("//*[@id=\"menu_item_101\"]/span"));
+
+
+        public AdminPage NavigateAdminModule() {
+            return new AdminPage(driver);
+        }
+
     }
 }
