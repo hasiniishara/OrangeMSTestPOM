@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OrangeMSTestPOM
+﻿namespace OrangeMSTestPOM
 {
     [TestClass]
     public class SanityTest
@@ -13,11 +7,11 @@ namespace OrangeMSTestPOM
         private static DashboardPage dashboardPage;
         private static AdminPage adminPage;
 
-        [ClassInitialize]
-        public static void ClassInitialize(TestContext context)
+        [TestInitialize]
+        public void SetUp()
         {
+            // Initialize WebDriver
             SystemUtil.OpenSystem();
-
             loginPage = new LoginPage(SystemUtil.GetDriver());
             dashboardPage = new DashboardPage(SystemUtil.GetDriver());
             adminPage = new AdminPage(SystemUtil.GetDriver());
@@ -25,27 +19,35 @@ namespace OrangeMSTestPOM
 
         [TestMethod]
         [TestCategory("LoginPageTest")]
+        [Priority(1)]
         public void LoginTest()
         {
+            // Perform login
             dashboardPage = loginPage.Login("AdminUser");
             Assert.IsTrue(SystemUtil.GetDriver().Url.Contains("https://devmini-trials711.orangehrmlive.com/client/#/dashboard"));
-            Console.WriteLine("Successfully login to the system");
+            Console.WriteLine("Successfully logged in.");
         }
 
         [TestMethod]
         [TestCategory("AdminPageTest")]
-
-        public void LoginAdminModuleTest()
+        [Priority(2)]
+        public void NavigateToAdminModuleTest()
         {
+            // Perform login
+            dashboardPage = loginPage.Login("AdminUser");
+            Thread.Sleep(3000);
+            // Navigate to admin module
             adminPage = dashboardPage.NavigateAdminModule();
             adminPage.VerifyAdminHeading();
+
+            Console.WriteLine("Successfully navigated to Admin module.");
         }
 
-        [ClassCleanup]
-        public static void ClassCleanup()
+        [TestCleanup]
+        public void TearDown()
         {
+            // Clean up WebDriver
             SystemUtil.CloseDriver();
         }
-
     }
 }
