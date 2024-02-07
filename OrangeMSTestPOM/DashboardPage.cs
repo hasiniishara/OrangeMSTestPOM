@@ -20,6 +20,7 @@ namespace OrangeMSTestPOM
 
 
         public AdminPage NavigateAdminModule() {
+            AdminNaviBtn.Click();
             return new AdminPage(driver);
         }
 
