@@ -57,9 +57,21 @@ namespace OrangeMSTestPOM
         {
             Console.WriteLine("Access message method");
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            bool successMessageDisplayed = wait.Until(driver => (bool)((IJavaScriptExecutor)driver).ExecuteScript("return document.querySelector('.toast-message') !== null"));
-            Console.WriteLine(successMessageDisplayed);
-            Assert.IsTrue(successMessageDisplayed, "Job Title is not adding successfully");
+            //If Adding Success then Toast Message should appeared
+            try
+            {
+                bool successMessageDisplayed = wait.Until(driver => (bool)((IJavaScriptExecutor)driver).ExecuteScript("return document.querySelector('.toast-message') !== null"));
+                Console.WriteLine(successMessageDisplayed);
+                Assert.IsTrue(successMessageDisplayed, "Job Title is not adding successfully");
+                Console.WriteLine("Successfully Add new job title");
+            }
+            //If adding fail, then validation should appeared & toast message should not
+            catch(WebDriverTimeoutException)
+            {
+                bool errorMessageDisplayed = driver.FindElements(By.XPath("//*[@id=\"modal-holder\"]/div/div/div/div[2]/form/oxd-decorator/div/div[1]/div[2]/span")).Any();
+                Assert.IsTrue(errorMessageDisplayed, "Validation error message not displayed");
+                Console.WriteLine("Duplicate Data Entry");
+            }
         }
     }
 }

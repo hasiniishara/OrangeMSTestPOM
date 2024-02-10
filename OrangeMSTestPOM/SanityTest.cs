@@ -50,8 +50,7 @@
         {
             dashboardPage = loginPage.Login("AdminUser");
             adminPage = dashboardPage.NavigateAdminModule();
-            adminPage.AddNewJobTitle("HasQA1","This is a test job title","Need to add to assign new employee");
-            Console.WriteLine("Successfully Add new job title");
+            adminPage.AddNewJobTitle("HasQA2","This is a test job title","Need to add to assign new employee");
         }
 
         [TestCleanup]
