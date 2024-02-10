@@ -3,6 +3,7 @@
     [TestClass]
     public class SanityTest
     {
+        //Create Page Objects
         private static LoginPage loginPage;
         private static DashboardPage dashboardPage;
         private static AdminPage adminPage;
