@@ -20,7 +20,14 @@ namespace OrangeMSTestPOM
 
         //Crate AdminPage web elements
         public IWebElement AdminHeader => driver.FindElement(By.XPath("//*[@id=\"topbar\"]/ul[1]/li/div"));
-        
+        public IWebElement JobSection => driver.FindElement(By.Id("menu_admin_Job"));
+        public IWebElement JobTitleSection => driver.FindElement(By.XPath("//*[@id=\"top_level_menu_item_menu_item_102\"]/sub-menu-container/div/div[2]/a"));
+        public IWebElement AddJobTitleButton => driver.FindElement(By.XPath("//*[@id=\"jobTitlesDiv\"]/div[1]/a/i"));
+        public IWebElement JobTitleText => driver.FindElement(By.Id("jobTitleName"));
+        public IWebElement JobDescriptionText => driver.FindElement(By.Id("jobDescription"));
+        public IWebElement JobNoteText => driver.FindElement(By.Id("note"));
+        public IWebElement JobTitleSaveBtn => driver.FindElement(By.Id("modal-save-button"));
+
         //Verifying the AdminPage heading
         public void VerifyAdminHeading()
         {
@@ -28,6 +35,12 @@ namespace OrangeMSTestPOM
             string ExpectedAdmin = "HR Administration";
 
             Assert.AreEqual(AdminHeaderText, ExpectedAdmin, "Admin heading doesn't match expected.");
+        }
+
+        //Add new job title to the system
+        public void AddNewJobTitle()
+        {
+
         }
     }
 }
