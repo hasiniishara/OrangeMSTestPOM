@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace OrangeMSTestPOM
 
         //Crate AdminPage web elements
         public IWebElement AdminHeader => driver.FindElement(By.XPath("//*[@id=\"topbar\"]/ul[1]/li/div"));
-        public IWebElement JobSection => driver.FindElement(By.Id("menu_admin_Job"));
+        public IWebElement JobSection => driver.FindElement(By.XPath("//*[@id=\"top_level_menu_item_menu_item_102\"]/a"));
         public IWebElement JobTitleSection => driver.FindElement(By.XPath("//*[@id=\"top_level_menu_item_menu_item_102\"]/sub-menu-container/div/div[2]/a"));
         public IWebElement AddJobTitleButton => driver.FindElement(By.XPath("//*[@id=\"jobTitlesDiv\"]/div[1]/a/i"));
         public IWebElement JobTitleText => driver.FindElement(By.Id("jobTitleName"));
@@ -47,7 +48,18 @@ namespace OrangeMSTestPOM
             JobDescriptionText.SendKeys(des);
             JobNoteText.SendKeys(note);
             JobTitleSaveBtn.Click();
+            WaitForSuccessMessage();
 
+        }
+
+        //Checking the toast message
+        private void WaitForSuccessMessage()
+        {
+            Console.WriteLine("Access message method");
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            bool successMessageDisplayed = wait.Until(driver => (bool)((IJavaScriptExecutor)driver).ExecuteScript("return document.querySelector('.toast-message') !== null"));
+            Console.WriteLine(successMessageDisplayed);
+            Assert.IsTrue(successMessageDisplayed, "Job Title is not adding successfully");
         }
     }
 }

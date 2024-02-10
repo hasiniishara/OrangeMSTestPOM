@@ -36,7 +36,6 @@
         {
             // Perform login
             dashboardPage = loginPage.Login("AdminUser");
-            Thread.Sleep(3000);
             // Navigate to admin module
             adminPage = dashboardPage.NavigateAdminModule();
             adminPage.VerifyAdminHeading();
@@ -51,7 +50,7 @@
         {
             dashboardPage = loginPage.Login("AdminUser");
             adminPage = dashboardPage.NavigateAdminModule();
-            adminPage.AddNewJobTitle("HasQA","This is a test job title","Need to add to assign new employee");
+            adminPage.AddNewJobTitle("HasQA1","This is a test job title","Need to add to assign new employee");
             Console.WriteLine("Successfully Add new job title");
         }
 

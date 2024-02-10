@@ -30,6 +30,8 @@ namespace OrangeMSTestPOM
             if (driver == null)
             {
                 driver = new ChromeDriver();
+                driver.Manage().Window.Maximize();
+                driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
             }
             return driver;
         }
