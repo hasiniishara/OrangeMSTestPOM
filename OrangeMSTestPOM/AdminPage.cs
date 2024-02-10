@@ -7,16 +7,21 @@ using System.Threading.Tasks;
 
 namespace OrangeMSTestPOM
 {
+    //Create class
     public class AdminPage
     {
+        //Create web driver object
         private readonly IWebDriver driver;
 
+        //Create AdminPage Constructor
         public AdminPage(IWebDriver driver) { 
             this.driver = driver;
         }
 
+        //Crate AdminPage web elements
         public IWebElement AdminHeader => driver.FindElement(By.XPath("//*[@id=\"topbar\"]/ul[1]/li/div"));
         
+        //Verifying the AdminPage heading
         public void VerifyAdminHeading()
         {
             string AdminHeaderText = AdminHeader.Text;
