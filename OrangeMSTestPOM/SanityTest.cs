@@ -43,6 +43,17 @@
 
             Console.WriteLine("Successfully navigated to Admin module.");
         }
+        //Verifying New Job Title Adding
+        [TestMethod]
+        [TestCategory("AdminPageTest")]
+        [Priority(3)]
+        public void VerifyJobTitleAdd()
+        {
+            dashboardPage = loginPage.Login("AdminUser");
+            adminPage = dashboardPage.NavigateAdminModule();
+            adminPage.AddNewJobTitle("HasQA","This is a test job title","Need to add to assign new employee");
+            Console.WriteLine("Successfully Add new job title");
+        }
 
         [TestCleanup]
         public void TearDown()
