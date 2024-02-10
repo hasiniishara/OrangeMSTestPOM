@@ -38,8 +38,15 @@ namespace OrangeMSTestPOM
         }
 
         //Add new job title to the system
-        public void AddNewJobTitle()
+        public void AddNewJobTitle(string job,string des, string note)
         {
+            JobSection.Click();
+            JobTitleSection.Click();
+            AddJobTitleButton.Click();
+            JobTitleText.SendKeys(job);
+            JobDescriptionText.SendKeys(des);
+            JobNoteText.SendKeys(note);
+            JobTitleSaveBtn.Click();
 
         }
     }
